@@ -1,91 +1,78 @@
 # Pendahuluan
 
-Ini adalah dokumentasi yang memberikan panduan langkah demi langkah cara melakukan setup SSH key untuk mengakses VPS.
+Ini adalah dokumentasi yang memberikan panduan langkah demi langkah _setup_ dan _remote_ VPS Biznet Gio Cloud via terminal dengan cara _\_metode-2 IMPORT SSH KEY_\_.
 
 # Langkah-Langkah
 
-## Berlangganan VPS
+1.  Buat akun [Biznet Gio Cloud](https://www.biznetgio.com/)
+2.  Setelah masuk ke halaman, di bagian _sidebar_ klik _Compute_, lalu pilih _NEO Lite_
+3.  Klik _CREATE NEW_, lalu isi _form_
+4.  Pada bagian _SSH Key_ pilih _IMPORT SSH KEY_
+5.  Beralih ke perangkat lokal Anda, lalu buka terminal
+6.  Buat SSH Key
 
-1. Berlangganan layanan VPS dan buat akun. Pada dokumentasi ini menggunakan layanan VPS [Biznet Gio Cloud](https://www.biznetgio.com/)
-2. Di bagian _sidebar_ klik _Compute_, lalu pilih _NEO Lite_
-3. Klik _create new_, lalu isi _form_
+    ```bash
+    ssh-keygen
+    ```
 
-## Aktifkan Akses Password Authentication
+7.  Menampilkan SSH Public Key
 
-```bash
-sudo su
-```
+    ```bash
+    cat ~/.ssh/id_rsa.pub
+    ```
 
-```bash
-sudo nano /etc/ssh/ssh_config
-```
+    _Petunjuk: *Copy* SSH Public Key_
 
-**Instruksi:**
+8.  Beralih ke halaman _form_ Biznet Gio, lalu _paste_ SSH Public Key yang telah dibuat
+9.  Jika sudah mengisi _form_ dan sudah yakin klik _NEXT_, lalu lakukan pembayaran
+10. Beralih ke halaman _Dashboard_, lalu klik nama service VPS yang ada telah dibuat
+11. Beralih ke halaman _NEO Lite_, lalu klik _OPEN CONSOLE_ untuk mengakses konsol atau terminal bawaan VPS Biznet Gio
+12. Masukan _username_ dan _password_
+13. Update sistem
 
-1. Ubah PasswordAuthentication no menjadi PasswordAuthentication yes seperti gambar dibawah ini
-2. Tekan CTRL + x
-3. Kemudian muncul pesan seperti ini -> (If prompted with "Save modified buffer?"), tekan Y, lalu tekan Enter untuk menyimpan
+    ```bash
+    sudo apt update
+    ```
 
-## Konfigurasi Authorized Keys untuk Menggunakan Kunci Publik
+14. Aktifkan akses _Password Authentication_ (Opsional)
+    **Petunjuk: Jika Anda tidak ingin ada autentikasi setiap mengakses VPS lewati langkah ini**
 
-```bash
-chmod g-w /home/user
-chmod 700 /home/user/.ssh
-chmod 600 /home/user/.ssh/authorized_keys
-```
+    ```bash
+    sudo su
+    sudo nano /etc/ssh/ssh_config
+    ```
 
-## Membuat SSH Key di Lokal
+    **Instruksi:**
 
-```bash
-ssh-keygen
-```
+        1. Ubah PasswordAuthentication no menjadi PasswordAuthentication yes seperti gambar dibawah ini
+        2. Tekan CTRL + x
+        3. Kemudian muncul pesan seperti ini -> (If prompted with "Save modified buffer?"), tekan Y, lalu tekan Enter untuk menyimpan
 
-Menampilkan SSH Public Key
+15. Konfigurasi _Authorized Keys_ untuk Menggunakan Kunci Publik (Opsional)
 
-```bash
-cat ~/.ssh/id_rsa.pub
-```
+    ```bash
+    chmod g-w /home/user
+    chmod 700 /home/user/.ssh
+    chmod 600 /home/user/.ssh/authorized_keys
+    ```
 
-copy-paste ke Biznet Gio di bagian SSH Key
+16. Tutup konsol Biznet Gio, lalu beralih lagi ke perangkat lokal, kemudian buka terminal
+17. Buka koneksi SSH
 
-## Remote VPS
+    ```bash
+    ssh <USERNAME>@<HOST OR IPADDRESS>
+    ```
 
-Open terminal
-
-```bash
-ssh <USERNAME>@<HOST OR IPADDRESS> -p 22
-```
-
-## Melihat Spesifikasi dan Benchmark VPS
+18. Melihat _benchmark_ dan spesifikasi VPS (Opsional)
 
 ```bash
 wget -q0- bench.sh | bash
 ```
 
-## Speedtest Koneksi Internet
+19. Test kecepatan koneksi internet (Opsional)
 
 ```bash
 sudo apt-get install curl
 curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
 sudo apt-get install speedtest
 ```
-
-## Method-2
-
-1. Download sshkeyfile.pem
-2. Put in some directory
-3. cd directory
-
-Akses VPS Via Terminal
-
-```bash
-ssh -i <sshkeyfile.pem> <SERVICE NAME OR USERNAME>@<HOST OR IPADDRESS>
-```
-
-Jika tidak bisa akses, jalankan perintah berikut:
-
-```bash
-rm -f /Users/dmu/.ssh/known_hosts
-```
-
-# Referensi
