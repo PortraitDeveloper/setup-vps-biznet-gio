@@ -23,13 +23,12 @@ Ini adalah dokumentasi yang memberikan panduan langkah demi langkah _setup_ dan 
     **Petunjuk: Jika Anda tidak ingin ada autentikasi setiap mengakses VPS lewati langkah ini**
 
     ```bash
-    sudo su
     sudo nano /etc/ssh/ssh_config
     ```
 
     **Instruksi:**
 
-        1. Ubah PasswordAuthentication no menjadi PasswordAuthentication yes seperti gambar dibawah ini
+        1. _Scroll_kebawah cari dan ubah PasswordAuthentication no menjadi PasswordAuthentication yes
         2. Tekan CTRL + x
         3. Kemudian muncul pesan seperti ini -> (If prompted with "Save modified buffer?"), tekan Y, lalu tekan Enter untuk menyimpan
 
@@ -50,13 +49,19 @@ Ini adalah dokumentasi yang memberikan panduan langkah demi langkah _setup_ dan 
 16. Melihat _benchmark_ dan spesifikasi VPS (Opsional)
 
     ```bash
-    wget -q0- bench.sh | bash
+    wget -qO- bench.sh | bash
     ```
 
 17. Test kecepatan koneksi internet (Opsional)
 
     ```bash
     sudo apt-get install curl
+    ```
+
+    ```bash
     curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+    ```
+
+    ```bash
     sudo apt-get install speedtest
     ```
