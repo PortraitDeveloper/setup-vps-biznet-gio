@@ -49,14 +49,14 @@ Ini adalah dokumentasi yang memberikan panduan langkah demi langkah _setup_ dan 
 
 16. Melihat _benchmark_ dan spesifikasi VPS (Opsional)
 
-```bash
-wget -q0- bench.sh | bash
-```
+    ```bash
+    wget -q0- bench.sh | bash
+    ```
 
 17. Test kecepatan koneksi internet (Opsional)
 
-```bash
-sudo apt-get install curl
-curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
-sudo apt-get install speedtest
-```
+    ```bash
+    sudo apt-get install curl
+    curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+    sudo apt-get install speedtest
+    ```
